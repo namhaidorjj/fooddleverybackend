@@ -6,6 +6,7 @@ import cookieParser from "cookie-parser";
 import { Request, Response } from "express";
 import { createUser } from "./controllers/userController";
 import { connectToDb } from "./connectToDb";
+import { cheackUser } from "./controllers/userController";
 
 const app = express();
 connectToDb();
@@ -16,7 +17,7 @@ const PORT = 8000;
 
 app.use(
   cors({
-    origin: "http://localhost:3001",
+    origin: "http://localhost:3000",
   })
 );
 app.use(cookieParser());
@@ -34,6 +35,10 @@ app.post("/createUser", (req: Request, res: Response) => {
 });
 app.listen(PORT, () => {
   console.log("Application running at: http://localhost:" + PORT);
+});
+
+app.post("/loginUser", (req: Request, res: Response) => {
+  cheackUser(req, res);
 });
 
 module.exports = app;
