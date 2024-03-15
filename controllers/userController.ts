@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import User from "../models/userModel";
+
 export const createUser = async (req: Request, res: Response) => {
   try {
     const { name, email, password } = req.body;
@@ -17,7 +18,7 @@ export const createUser = async (req: Request, res: Response) => {
       role: "User",
       avatarImg: "",
     });
-    console.log(user);
+
     return res.status(201).json({ message: "Successfully created" });
   } catch (error) {
     console.error("error in createUser", error);
